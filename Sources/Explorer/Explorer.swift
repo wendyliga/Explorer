@@ -264,36 +264,37 @@ extension Explorer {
             return .failure(ExplorerError.directoryNotValid(directory: target))
         }
         
-        var explorables = [Explorable]()
-        
-        for finding in findings {
-            let filePath = self.target(path: target, suffix: finding)
-
-            let isCurrentFindingIsFile = isFile(path: filePath)
-
-            if case let .failure(error) = isCurrentFindingIsFile {
-                return .failure(error)
-            } else if case let .success(isFile) = isCurrentFindingIsFile {
-                if isFile {
-                    explorables.append(File(name: finding, content: try? String(contentsOfFile: filePath, encoding: .utf8)))
-                } else {
-                    guard isFolderIncluded else { continue }
-
-                    if isRecursive {
-                        let folderContent = list(at: filePath, withFolder: isFolderIncluded, isRecursive: isRecursive)
-
-                        if case let .failure(error) = folderContent {
-                            return .failure(error)
-                        } else if case let .success(folderExplorables) = folderContent {
-                            explorables.append(contentsOf: folderExplorables)
-                        }
-                    } else {
-                        explorables.append(Folder(name: finding, contents: []))
-                    }
-                }
+        let defineExplorable: (String) -> Result<[Explorable], Error> = { [unowned self] filename in
+            let filePath = self.target(path: target, suffix: filename)
+            let isCurrentFindingIsFile = self.isFile(path: filePath)
+            
+            guard isCurrentFindingIsFile.nonFailureResult != nil else {
+                return .failure(ExplorerError.fileNotValid(file: filePath))
             }
+            
+            guard !isCurrentFindingIsFile.value else {
+                let file = File(name: filename, content: try? String(contentsOfFile: filePath, encoding: .utf8))
+                return .success([file])
+            }
+            
+            guard isFolderIncluded else {
+                return .success([])
+            }
+            
+            guard isRecursive else {
+                let folder = Folder(name: filename, contents: [])
+                return .success([folder])
+            }
+            
+            // recursivly scan throught folder, until no folder found
+            return self.list(at: filePath, withFolder: isFolderIncluded, isRecursive: isRecursive)
         }
         
-        return .success(explorables)
+        return findings.map { defineExplorable($0) }.reduce(.success([])) { (previousResult, currentResult) -> Result<[Explorable], Error> in
+            if previousResult.nonSuccessResult != nil || currentResult.nonSuccessResult != nil {
+                return previousResult
+            }
+            return .success(previousResult.value + currentResult.value)
+        }
     }
 }
