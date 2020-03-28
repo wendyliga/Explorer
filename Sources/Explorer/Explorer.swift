@@ -275,11 +275,12 @@ extension Explorer {
                 return .failure(error)
             } else if case let .success(isFile) = isCurrentFindingIsFile {
                 if isFile {
-                    guard let fileContent = try? String(contentsOfFile: filePath, encoding: .utf8) else {
-                        return .failure(ExplorerError.fileNotValid(file: finding))
+                    do {
+                        let fileContent = try String(contentsOfFile: filePath, encoding: .utf8)
+                        explorables.append(File(name: finding, content: fileContent))
+                    } catch {
+                        .failure(GeneralError.multipleError([error, ExplorerError.fileNotValid(file: finding)]))
                     }
-
-                    explorables.append(File(name: finding, content: fileContent))
                 } else {
                     guard isFolderIncluded else { continue }
 
