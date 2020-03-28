@@ -266,8 +266,10 @@ extension Explorer {
         
         var explorables = [Explorable]()
         
-//        for finding in findings {
-//            let filePath = self.target(path: target, suffix: finding)
+        for finding in findings {
+            let filePath = self.target(path: target, suffix: finding)
+            
+            explorables.append(File(name: filePath, content: ""))
 //
 //            let isCurrentFindingIsFile = isFile(path: filePath)
 //
@@ -296,8 +298,8 @@ extension Explorer {
 //                    }
 //                }
 //            }
-//        }
+        }
         
-        return .success(findings.map { name in File(name: name, content: "")})
+        return .success(explorables)
     }
 }
