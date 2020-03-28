@@ -287,20 +287,16 @@ extension Explorer {
             write(operation: SingleFileOperation(file: $0, path: operation.path), writingStrategy: writingStrategy)
         }
         
-        let writeFailureResults = results.compactMap{ $0.nonSuccessResult }
+        let failureResults = results.compactMap { $0.failureValue }
         
         // revert if failed
-        if writeFailureResults.isNotEmpty {
+        guard failureResults.isEmpty else {
             
             // delete all success file
-            results.compactMap{ $0.nonFailureResult }
-                .forEach{ delete(operation: $0.value) }
+            results.compactMap{ $0.successValue }
+                .forEach { delete(operation: $0) }
             
-            let errors = writeFailureResults.map { result -> Error in
-                return result.error
-            }
-            
-            return .failure(GeneralError.multipleError(errors))
+            return .failure(GeneralError.multipleError(failureResults))
         }
         
         return .success(operation)
@@ -374,20 +370,16 @@ extension Explorer {
             write(operation: SingleFolderOperation(folder: $0, path: operation.path), writingStrategy: writingStrategy)
         }
         
-        let writeFailureResults = results.compactMap{ $0.nonSuccessResult }
+        let failureResults = results.compactMap { $0.failureValue }
         
         // revert if failed
-        if writeFailureResults.isNotEmpty {
+        guard failureResults.isEmpty else {
             
-            // delete all success one
-            results.compactMap{ $0.nonFailureResult }
-                .forEach{ delete(operation: $0.value) }
+            // delete all success file
+            results.compactMap{ $0.successValue }
+                .forEach { delete(operation: $0) }
             
-            let errors = writeFailureResults.map { result -> Error in
-                return result.error
-            }
-            
-            return .failure(GeneralError.multipleError(errors))
+            return .failure(GeneralError.multipleError(failureResults))
         }
         
         return .success(operation)
@@ -438,11 +430,11 @@ extension Explorer {
             let filePath = self.target(path: target, suffix: filename)
             let isCurrentFindingIsFile = self.isFile(path: filePath)
             
-            guard isCurrentFindingIsFile.nonFailureResult != nil else {
+            guard let isFile = isCurrentFindingIsFile.nonFailureResult else {
                 return .failure(ExplorerError.fileNotValid(file: filePath))
             }
             
-            guard !isCurrentFindingIsFile.value else {
+            guard !isFile.g else {
                 let file = File(name: filename, content: try? String(contentsOfFile: filePath, encoding: .utf8))
                 return .success([file])
             }
