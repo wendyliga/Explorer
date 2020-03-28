@@ -23,8 +23,6 @@ extension Explorer {
             .withoutPrefix("~", replaceWith: NSHomeDirectory())
             .withoutSuffix("/") + "/" + suffix.withoutPrefix("/")
             .withoutSuffix("/")
-            .replacingOccurrences(of: #" \"#, with: " ")
-            .replacingOccurrences(of: " ", with: #" \"#)
     }
 }
 
@@ -248,13 +246,13 @@ extension Explorer {
      Check if current path is file or directory
      */
     public func isFile(path: String) -> Result<Bool, Error> {
-        var isFile: ObjCBool = false
+        var isDirectory: ObjCBool = false
         
-        guard fileManager.fileExists(atPath: path, isDirectory: &isFile) == true else {
+        guard fileManager.fileExists(atPath: path, isDirectory: &isDirectory) == true else {
             return .failure(ExplorerError.pathDidNotExist(path: path))
         }
         
-        return .success(isFile.boolValue)
+        return .success(!isDirectory.boolValue)
     }
 }
 
@@ -270,36 +268,34 @@ extension Explorer {
         
         for finding in findings {
             let filePath = self.target(path: target, suffix: finding)
-            
-            explorables.append(File(name: filePath, content: ""))
-//
-//            let isCurrentFindingIsFile = isFile(path: filePath)
-//
-//            if case let .failure(error) = isCurrentFindingIsFile {
-//                return .failure(error)
-//            } else if case let .success(isFile) = isCurrentFindingIsFile {
-//                if isFile {
-//                    guard let fileContent = try? String(contentsOfFile: filePath, encoding: .utf8) else {
-//                        return .failure(ExplorerError.fileNotValid(file: finding))
-//                    }
-//
-//                    explorables.append(File(name: finding, content: fileContent))
-//                } else {
-//                    guard isFolderIncluded else { continue }
-//
-//                    if isRecursive {
-//                        let folderContent = list(at: filePath, withFolder: isFolderIncluded, isRecursive: isRecursive)
-//
-//                        if case let .failure(error) = folderContent {
-//                            return .failure(error)
-//                        } else if case let .success(folderExplorables) = folderContent {
-//                            explorables.append(contentsOf: folderExplorables)
-//                        }
-//                    } else {
-//                        explorables.append(Folder(name: finding, contents: []))
-//                    }
-//                }
-//            }
+
+            let isCurrentFindingIsFile = isFile(path: filePath)
+
+            if case let .failure(error) = isCurrentFindingIsFile {
+                return .failure(error)
+            } else if case let .success(isFile) = isCurrentFindingIsFile {
+                if isFile {
+                    guard let fileContent = try? String(contentsOfFile: filePath, encoding: .utf8) else {
+                        return .failure(ExplorerError.fileNotValid(file: finding))
+                    }
+
+                    explorables.append(File(name: finding, content: fileContent))
+                } else {
+                    guard isFolderIncluded else { continue }
+
+                    if isRecursive {
+                        let folderContent = list(at: filePath, withFolder: isFolderIncluded, isRecursive: isRecursive)
+
+                        if case let .failure(error) = folderContent {
+                            return .failure(error)
+                        } else if case let .success(folderExplorables) = folderContent {
+                            explorables.append(contentsOf: folderExplorables)
+                        }
+                    } else {
+                        explorables.append(Folder(name: finding, contents: []))
+                    }
+                }
+            }
         }
         
         return .success(explorables)
