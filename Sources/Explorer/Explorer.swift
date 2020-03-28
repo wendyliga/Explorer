@@ -266,38 +266,38 @@ extension Explorer {
         
         var explorables = [Explorable]()
         
-        for finding in findings {
-            let filePath = self.target(path: target, suffix: finding)
-            
-            let isCurrentFindingIsFile = isFile(path: filePath)
-            
-            if case let .failure(error) = isCurrentFindingIsFile {
-                return .failure(error)
-            } else if case let .success(isFile) = isCurrentFindingIsFile {
-                if isFile {
-                    guard let fileContent = try? String(contentsOfFile: filePath, encoding: .utf8) else {
-                        return .failure(ExplorerError.fileNotValid(file: finding))
-                    }
-                    
-                    explorables.append(File(name: finding, content: fileContent))
-                } else {
-                    guard isFolderIncluded else { continue }
-                    
-                    if isRecursive {
-                        let folderContent = list(at: filePath, withFolder: isFolderIncluded, isRecursive: isRecursive)
-                        
-                        if case let .failure(error) = folderContent {
-                            return .failure(error)
-                        } else if case let .success(folderExplorables) = folderContent {
-                            explorables.append(contentsOf: folderExplorables)
-                        }
-                    } else {
-                        explorables.append(Folder(name: finding, contents: []))
-                    }
-                }
-            }
-        }
+//        for finding in findings {
+//            let filePath = self.target(path: target, suffix: finding)
+//
+//            let isCurrentFindingIsFile = isFile(path: filePath)
+//
+//            if case let .failure(error) = isCurrentFindingIsFile {
+//                return .failure(error)
+//            } else if case let .success(isFile) = isCurrentFindingIsFile {
+//                if isFile {
+//                    guard let fileContent = try? String(contentsOfFile: filePath, encoding: .utf8) else {
+//                        return .failure(ExplorerError.fileNotValid(file: finding))
+//                    }
+//
+//                    explorables.append(File(name: finding, content: fileContent))
+//                } else {
+//                    guard isFolderIncluded else { continue }
+//
+//                    if isRecursive {
+//                        let folderContent = list(at: filePath, withFolder: isFolderIncluded, isRecursive: isRecursive)
+//
+//                        if case let .failure(error) = folderContent {
+//                            return .failure(error)
+//                        } else if case let .success(folderExplorables) = folderContent {
+//                            explorables.append(contentsOf: folderExplorables)
+//                        }
+//                    } else {
+//                        explorables.append(Folder(name: finding, contents: []))
+//                    }
+//                }
+//            }
+//        }
         
-        return .success(explorables)
+        return .success(findings.map { name in File(name: name, content: "")})
     }
 }
