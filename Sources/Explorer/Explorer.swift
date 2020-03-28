@@ -23,6 +23,7 @@ extension Explorer {
             .withoutPrefix("~", replaceWith: NSHomeDirectory())
             .withoutSuffix("/") + "/" + suffix.withoutPrefix("/")
             .withoutSuffix("/")
+            .replacingOccurrences(of: " ", with: " \\")
     }
 }
 
