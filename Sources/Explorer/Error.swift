@@ -1,6 +1,6 @@
 import Foundation
 
-public enum FileError: Error, LocalizedError {
+public enum ExplorerError: Error, LocalizedError {
     case pathDidNotExist(path: String)
     case fileExist(file: String)
     case fileNotValid(file: String)
