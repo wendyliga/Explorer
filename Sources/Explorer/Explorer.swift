@@ -267,13 +267,15 @@ extension Explorer {
         var explorables = [Explorable]()
         
         for finding in findings {
-            let isCurrentFindingIsFile = isFile(path: finding)
+            let filePath = self.target(path: target, suffix: finding)
+            
+            let isCurrentFindingIsFile = isFile(path: filePath)
             
             if case let .failure(error) = isCurrentFindingIsFile {
                 return .failure(error)
             } else if case let .success(isFile) = isCurrentFindingIsFile {
                 if isFile {
-                    guard let fileContent = try? String(contentsOfFile: self.target(path: target, suffix: finding), encoding: .utf8) else {
+                    guard let fileContent = try? String(contentsOfFile: filePath, encoding: .utf8) else {
                         return .failure(ExplorerError.fileNotValid(file: finding))
                     }
                     
@@ -282,7 +284,7 @@ extension Explorer {
                     guard isFolderIncluded else { continue }
                     
                     if isRecursive {
-                        let folderContent = list(at: self.target(path: target, suffix: finding), withFolder: isFolderIncluded, isRecursive: isRecursive)
+                        let folderContent = list(at: filePath, withFolder: isFolderIncluded, isRecursive: isRecursive)
                         
                         if case let .failure(error) = folderContent {
                             return .failure(error)
