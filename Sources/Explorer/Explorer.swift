@@ -275,12 +275,7 @@ extension Explorer {
                 return .failure(error)
             } else if case let .success(isFile) = isCurrentFindingIsFile {
                 if isFile {
-                    do {
-                        let fileContent = try Data(contentsOf: URL(string: filePath)!) // String(contentsOfFile: filePath, encoding: .utf8)
-                        explorables.append(File(name: finding, content: nil))
-                    } catch {
-                        return .failure(GeneralError.multipleError([error, ExplorerError.fileNotValid(file: finding)]))
-                    }
+                    explorables.append(File(name: finding, content: try? String(contentsOfFile: filePath, encoding: .utf8)))
                 } else {
                     guard isFolderIncluded else { continue }
 
