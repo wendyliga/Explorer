@@ -279,7 +279,7 @@ extension Explorer {
                         let fileContent = try String(contentsOfFile: filePath, encoding: .utf8)
                         explorables.append(File(name: finding, content: fileContent))
                     } catch {
-                        .failure(GeneralError.multipleError([error, ExplorerError.fileNotValid(file: finding)]))
+                        return .failure(GeneralError.multipleError([error, ExplorerError.fileNotValid(file: finding)]))
                     }
                 } else {
                     guard isFolderIncluded else { continue }
