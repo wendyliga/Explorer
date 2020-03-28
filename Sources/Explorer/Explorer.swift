@@ -17,6 +17,166 @@ public class Explorer {
     }
 }
 
+/**
+ Explorer Writing Strategy, when you called `create` function, you can provide writing strategy for it.
+ */
+public enum WriteStrategy {
+    
+    /**
+     Will Skip existing file and only write file that doesn't exist
+     */
+    case skippable
+    
+    /**
+     Report as what it is, if error is happended, will fail the operation
+     */
+    case safe
+    
+    /**
+     Will Overwrite anything, if file exist, will overwrite it with the new one
+     */
+    case overwrite
+}
+
+/**
+ An abstraction for any path related value used on Explorer
+ 
+ For now used to abstract `Folder` and `File`
+ */
+public protocol Explorable {}
+
+public struct Folder: Explorable {
+    public let name: String
+    public let contents: [Explorable]
+    
+    public init(name: String, contents: [Explorable]) {
+        self.name = name
+        self.contents = contents
+    }
+}
+
+public struct File: Explorable {
+    public let name: String
+    
+    /**
+     File content in String, for now, only support file that're not need any spesial encoding, so for example , png file will have empty content.
+     */
+    public let content: String?
+    
+    public init(name: String, content: String?) {
+        self.name = name
+        self.content = content
+    }
+}
+
+public struct SingleFileOperation {
+    public let file: File
+    public let path: String
+    
+    public init(file: File, path: String) {
+        self.file = file
+        self.path = path
+    }
+}
+
+public struct BatchFileOperation {
+    public let files: [File]
+    public let path: String
+    
+    public init(files: [File], path: String) {
+        self.files = files
+        self.path = path
+    }
+}
+
+public struct SingleFolderOperation {
+    public let folder: Folder
+    public let path: String
+    
+    public init(folder: Folder, path: String) {
+        self.folder = folder
+        self.path = path
+    }
+}
+
+public struct BatchFolderOperation {
+    public let folders: [Folder]
+    public let path: String
+    
+    public init(folders: [Folder], path: String) {
+        self.folders = folders
+        self.path = path
+    }
+}
+
+public enum ExplorerError: Error, LocalizedError {
+    case pathDidNotExist(path: String)
+    case fileExist(file: String)
+    case fileNotValid(file: String)
+    case directoryNotValid(directory: String)
+    case writeError(file: String)
+    
+    public var errorDescription: String? {
+        switch self {
+        case .pathDidNotExist(let path):
+            return "\(path) did not exist"
+        case .fileExist(let file):
+            return "\(file) is already exist"
+        case .fileNotValid(let file):
+            return "\(file) is not valid"
+        case .writeError(let file):
+            return "unable to write file at \(file)"
+        case .directoryNotValid(let directory):
+            return "\(directory) is not valid"
+        }
+    }
+}
+
+public protocol FileProvider {
+    func fileExists(atPath: String) -> Bool
+    func fileExists(atPath path: String, isDirectory: UnsafeMutablePointer<ObjCBool>?) -> Bool
+    func removeItem(atPath: String) throws
+    func createFile(atPath: String, contents: Data?, attributes: [FileAttributeKey : Any]?) -> Bool
+    func createDirectory(atPath: String, withIntermediateDirectories: Bool, attributes: [FileAttributeKey : Any]?) throws
+    func contentsOfDirectory(atPath path: String) throws -> [String]
+    
+    var currentDirectoryPath: String { get }
+}
+
+public class DefaultFileProvider: FileProvider {
+    private let fileManager = FileManager.default
+    
+    public init() {}
+    
+    public var currentDirectoryPath: String {
+        fileManager.currentDirectoryPath
+    }
+    
+    public func fileExists(atPath: String) -> Bool {
+        fileManager.fileExists(atPath: atPath)
+    }
+    
+    public func fileExists(atPath path: String, isDirectory: UnsafeMutablePointer<ObjCBool>?) -> Bool {
+        fileManager.fileExists(atPath: path, isDirectory: isDirectory)
+    }
+    
+    public func removeItem(atPath: String) throws {
+        try fileManager.removeItem(atPath: atPath)
+    }
+    
+    public func createFile(atPath: String, contents: Data?, attributes: [FileAttributeKey : Any]? = nil) -> Bool {
+        fileManager.createFile(atPath: atPath, contents: contents, attributes: attributes)
+    }
+    
+    public func createDirectory(atPath: String, withIntermediateDirectories: Bool, attributes: [FileAttributeKey : Any]? = nil) throws {
+        try fileManager.createDirectory(atPath: atPath, withIntermediateDirectories: withIntermediateDirectories, attributes: attributes)
+    }
+    
+    public func contentsOfDirectory(atPath path: String) throws -> [String] {
+        try fileManager.contentsOfDirectory(atPath: path)
+    }
+}
+
 extension Explorer {
     private func target(path: String, suffix: String) -> String {
         return path
@@ -257,6 +417,16 @@ extension Explorer {
 }
 
 extension Explorer {
+    /**
+     Scan directory at path, will return the content inside it
+     
+     - Parameters:
+        - path: Path to scan
+        - withFolder: Also Scan folder or not
+        - isRecursive: will include content inside folder
+     
+     - Returns: Result of Explorables
+     */
     public func list(at path: String, withFolder isFolderIncluded: Bool, isRecursive: Bool) -> Result<[Explorable], Error> {
         let target = self.target(path: path, suffix: "")
         
