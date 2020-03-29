@@ -40,14 +40,3 @@ jobs:
       uses: actions/checkout@v2
     - name: Testing
       run: swift test
-
-  xcodebuild_test:
-    name: Xcode Unit Test
-    runs-on: macos-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Generate Xcode Project
-      run: swift package generate-xcodeproj
-    - name: Xcode Testing
-      run: xcodebuild test -project Explorer.xcodeproj -scheme Explorer
