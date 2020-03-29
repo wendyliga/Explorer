@@ -430,11 +430,11 @@ extension Explorer {
             let filePath = self.target(path: target, suffix: filename)
             let isCurrentFindingIsFile = self.isFile(path: filePath)
             
-            guard let isFile = isCurrentFindingIsFile.nonFailureResult else {
-                return .failure(ExplorerError.fileNotValid(file: filePath))
+            guard let isFile = isCurrentFindingIsFile.successValue else {
+                return .failure(isCurrentFindingIsFile.failureValue!)
             }
             
-            guard !isFile.g else {
+            guard !isFile else {
                 let file = File(name: filename, content: try? String(contentsOfFile: filePath, encoding: .utf8))
                 return .success([file])
             }
@@ -453,10 +453,10 @@ extension Explorer {
         }
         
         return findings.map { defineExplorable($0) }.reduce(.success([])) { (previousResult, currentResult) -> Result<[Explorable], Error> in
-            if previousResult.nonSuccessResult != nil || currentResult.nonSuccessResult != nil {
+            if previousResult.failureValue != nil || currentResult.failureValue != nil {
                 return previousResult
             }
-            return .success(previousResult.value + currentResult.value)
+            return .success(previousResult.successValue! + currentResult.successValue!)
         }
     }
 }
