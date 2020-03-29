@@ -2,18 +2,41 @@ name: Swift
 
 on:
   push:
-    branches: [ master ]
+    branches: 
+      - master
+      - hotfix
   pull_request:
-    branches: [ master ]
-
+    branches: 
+      - '*'
+      
 jobs:
-  build:
-
-    runs-on: macos-latest
-
+  ubuntu_xenial_test:
+    name: Ubuntu-16.04 Unit Test
+    runs-on: ubuntu-16.04
+    container: 
+      image: vapor/swift:5.2-xenial
     steps:
-    - uses: actions/checkout@v2
-    - name: Build
-      run: swift build -v
-    - name: Run tests
-      run: swift test -v
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Testing
+      run: swift test
+
+  ubuntu_bionic_test:
+    name: Ubuntu-18.04 Unit Test
+    container: 
+      image: vapor/swift:5.2-bionic
+    runs-on: ubuntu-18.04
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Testing
+      run: swift test
+
+  macos_test:
+    name: MacOS Unit Test
+    runs-on: macos-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Testing
+      run: swift test
