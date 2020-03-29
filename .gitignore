@@ -36,6 +36,7 @@ Packages
 xcuserdata
 DerivedData/
 *.xcodeproj
+.swiftpm/
 
 
 # End of https://www.gitignore.io/api/macos,swiftpackagemanager
