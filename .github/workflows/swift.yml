@@ -50,4 +50,4 @@ jobs:
     - name: Generate Xcode Project
       run: swift package generate-xcodeproj
     - name: Xcode Testing
-      run: xcodebuild test -project Explorer.xcodeproj -target Explorer
+      run: xcodebuild test -project Explorer.xcodeproj -scheme Explorer
