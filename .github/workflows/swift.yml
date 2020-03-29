@@ -11,24 +11,34 @@ on:
       
 jobs:
   ubuntu_xenial_test:
-    name: ubuntu_xenial Test
+    name: Ubuntu-16.04 Unit Test
     runs-on: ubuntu-16.04
     container: 
       image: vapor/swift:5.2-xenial
     steps:
         - uses: actions/checkout@v2
         - run: swift test
+
   ubuntu_bionic_test:
-    name: ubuntu_xenial Test
+    name: Ubuntu-18.04 Unit Test
     container: 
       image: vapor/swift:5.2-bionic
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
         - uses: actions/checkout@v2
         - run: swift test
+
   macos_test:
-    name: MacOS Test
+    name: MacOS Unit Test
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
     - run: swift test
+
+  xcodebuild_test:
+    name: Xcode Unit Test
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: swift package generate-xcodeproj
+    - run: xcodebuild test -scheme Explorer
