@@ -1,35 +1,34 @@
 name: Swift
 
-on: [push, pull_request]
+on:
+  push:
+    branches: 
+      - master
+      - hotfix
+  pull_request:
+    branches: 
+      - '*'
       
 jobs:
-  linux_test:
-    name: Linux Test
+  ubuntu_xenial_test:
+    name: ubuntu_xenial Test
     runs-on: ubuntu-16.04
+    container: 
+      image: vapor/swift:5.2-xenial
     steps:
-      # - name: Checkout
         - uses: actions/checkout@v2
         - run: swift test
-      # - name: Update Swift toolchain neccessary Depedencies
-      #   run:  sudo apt-get install clang libcurl3 libcurl4-openssl-dev libpython2.7 libpython2.7-dev libicu-dev libstdc++6
-      # - name: CURL Swift Toolchain
-      #   uses: wei/curl@master
-      #   with:
-      #     args: https://swift.org/builds/swift-5.1-release/ubuntu1604/swift-5.1-RELEASE/swift-5.1-RELEASE-ubuntu16.04.tar.gz 
-      # - name: Unzip Swift Toolchain
-      #   run: tar xzf swift-5.1-RELEASE-ubuntu16.04.tar.gz
-      # - name: Add to PATH
-      #   run: export PATH="$(pwd)/swift-5.1-RELEASE-ubuntu16.04/usr/bin:$PATH"
-      # - name: Update Package
-      #   run: swift package update
-      # - name: Testing
-        # run: swift test
+  ubuntu_bionic_test:
+    name: ubuntu_xenial Test
+    container: 
+      image: vapor/swift:5.2-bionic
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v2
+        - run: swift test
   macos_test:
     name: MacOS Test
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Build
-      run: swift build -v
-    - name: Run tests
-      run: swift test -v
+    - run: swift test
