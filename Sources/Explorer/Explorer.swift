@@ -43,15 +43,19 @@ public enum WriteStrategy {
  
  For now used to abstract `Folder` and `File`
  */
-public protocol Explorable {}
+public protocol Explorable {
+    var attributes: [FileAttributeKey : Any]? { get }
+}
 
 public struct Folder: Explorable {
     public let name: String
     public let contents: [Explorable]
+    public let attributes: [FileAttributeKey : Any]?
     
-    public init(name: String, contents: [Explorable]) {
+    public init(name: String, contents: [Explorable], attributes: [FileAttributeKey : Any]? = nil) {
         self.name = name
         self.contents = contents
+        self.attributes = attributes
     }
 }
 
@@ -63,9 +67,17 @@ public struct File: Explorable {
      */
     public let content: String?
     
-    public init(name: String, content: String?) {
+    /**
+     File extension
+     */
+    public let `extension`: String?
+    public let attributes: [FileAttributeKey : Any]?
+    
+    public init(name: String, content: String?, extension: String?, attributes: [FileAttributeKey : Any]? = nil) {
         self.name = name
         self.content = content
+        self.extension = `extension`
+        self.attributes = attributes
     }
 }
 
@@ -139,6 +151,7 @@ public protocol FileProvider {
     func createFile(atPath: String, contents: Data?, attributes: [FileAttributeKey : Any]?) -> Bool
     func createDirectory(atPath: String, withIntermediateDirectories: Bool, attributes: [FileAttributeKey : Any]?) throws
     func contentsOfDirectory(atPath path: String) throws -> [String]
+    func attributesOfItem(atPath path: String) throws -> [FileAttributeKey : Any]
     
     var currentDirectoryPath: String { get }
 }
@@ -174,6 +187,36 @@ public class DefaultFileProvider: FileProvider {
     
     public func contentsOfDirectory(atPath path: String) throws -> [String] {
         try fileManager.contentsOfDirectory(atPath: path)
+    }
+    
+    public func attributesOfItem(atPath path: String) throws -> [FileAttributeKey : Any] {
+        try fileManager.attributesOfItem(atPath: path)
+    }
+}
+
+extension String {
+    /**
+     Remove file extension from filename
+     */
+    func withoutExtension(replaceWith newString: String = "") -> String {
+        var dotIndex: Int?
+        var isDotFound = false
+        
+        for (index, character) in self.enumerated().reversed() {
+            guard !isDotFound else { break }
+            
+            if character == "." && !isDotFound {
+                dotIndex = index
+                isDotFound = true
+            }
+        }
+        
+        guard let unwarpDotIndex = dotIndex else {
+            return self
+        }
+        
+        let startDotIndex = index(startIndex, offsetBy: unwarpDotIndex)
+        return replacingCharacters(in: startDotIndex..<endIndex, with: newString)
     }
 }
 
@@ -260,7 +303,7 @@ extension Explorer {
         }
         
         // default create file will overwrite the target
-        guard fileManager.createFile(atPath: target, contents: operation.file.content?.data(using: .utf8), attributes: nil) else {
+        guard fileManager.createFile(atPath: target, contents: operation.file.content?.data(using: .utf8), attributes: operation.file.attributes) else {
             return .failure(ExplorerError.writeError(file: target))
         }
         
@@ -325,7 +368,7 @@ extension Explorer {
         let target = self.target(path: operation.path, suffix: operation.folder.name)
         
         do {
-            try fileManager.createDirectory(atPath: target, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectory(atPath: target, withIntermediateDirectories: true, attributes: operation.folder.attributes)
         } catch let error {
             return .failure(error)
         }
@@ -435,7 +478,11 @@ extension Explorer {
             }
             
             guard !isFile else {
-                let file = File(name: filename, content: try? String(contentsOfFile: filePath, encoding: .utf8))
+                let filenameWithoutExtension = filename.withoutExtension()
+                let fileExtension = filename.withoutPrefix(filenameWithoutExtension + ".")
+                let attributes = try? self.fileManager.attributesOfItem(atPath: filePath)
+                
+                let file = File(name: filenameWithoutExtension, content: try? String(contentsOfFile: filePath, encoding: .utf8), extension: fileExtension, attributes: attributes)
                 return .success([file])
             }
             
@@ -443,13 +490,24 @@ extension Explorer {
                 return .success([])
             }
             
+            let attributes = try? self.fileManager.attributesOfItem(atPath: filePath)
+            
             guard isRecursive else {
-                let folder = Folder(name: filename, contents: [])
+                let folder = Folder(name: filename, contents: [], attributes: attributes)
+                
                 return .success([folder])
             }
             
             // recursivly scan throught folder, until no folder found
-            return self.list(at: filePath, withFolder: isFolderIncluded, isRecursive: isRecursive)
+            let recursiveScanFolder = self.list(at: filePath, withFolder: isFolderIncluded, isRecursive: isRecursive)
+            
+            guard let recursiveExplorables = recursiveScanFolder.successValue else {
+                return .failure(recursiveScanFolder.failureValue!)
+            }
+            
+            let folder = Folder(name: filename, contents: recursiveExplorables, attributes: attributes)
+        
+            return .success([folder])
         }
         
         return findings.map { defineExplorable($0) }.reduce(.success([])) { (previousResult, currentResult) -> Result<[Explorable], Error> in
