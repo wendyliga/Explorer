@@ -23,7 +23,7 @@ jobs:
       # - name: Update Package
       #   run: swift package update
       # - name: Testing
-        run: swift test
+        # run: swift test
   macos_test:
     name: MacOS Test
     runs-on: macos-latest
