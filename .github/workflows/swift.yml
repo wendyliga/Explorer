@@ -16,8 +16,10 @@ jobs:
     container: 
       image: vapor/swift:5.2-xenial
     steps:
-        - uses: actions/checkout@v2
-        - run: swift test
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Testing
+      run: swift test
 
   ubuntu_bionic_test:
     name: Ubuntu-18.04 Unit Test
@@ -25,20 +27,27 @@ jobs:
       image: vapor/swift:5.2-bionic
     runs-on: ubuntu-18.04
     steps:
-        - uses: actions/checkout@v2
-        - run: swift test
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Testing
+      run: swift test
 
   macos_test:
     name: MacOS Unit Test
     runs-on: macos-latest
     steps:
-    - uses: actions/checkout@v2
-    - run: swift test
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Testing
+      run: swift test
 
   xcodebuild_test:
     name: Xcode Unit Test
     runs-on: macos-latest
     steps:
-    - uses: actions/checkout@v2
-    - run: swift package generate-xcodeproj
-    - run: xcodebuild test -scheme Explorer
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Generate Xcode Project
+      run: swift package generate-xcodeproj
+    - name: Xcode Testing
+      run: xcodebuild test -project Explorer.xcodeproj -target Explorer
