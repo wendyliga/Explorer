@@ -13,8 +13,8 @@ jobs:
         run:  sudo apt-get install clang libcurl3 libcurl4-openssl-dev libpython2.7 libpython2.7-dev libicu-dev libstdc++6
       - name: CURL Swift Toolchain
         uses: wei/curl@master
-          with:
-            args: https://swift.org/builds/swift-5.1-release/ubuntu1604/swift-5.1-RELEASE/swift-5.1-RELEASE-ubuntu16.04.tar.gz 
+        with:
+          args: https://swift.org/builds/swift-5.1-release/ubuntu1604/swift-5.1-RELEASE/swift-5.1-RELEASE-ubuntu16.04.tar.gz 
       - name: Unzip Swift Toolchain
         run: tar xzf swift-5.1-RELEASE-ubuntu16.04.tar.gz
       - name: Add to PATH
