@@ -15,17 +15,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Download Swift
-        run: sudo apt-get install clang libcurl3 libcurl4-openssl-dev libpython2.7 libpython2.7-dev
-        libicu-dev libstdc++6
+      # - name: Download Swift
+        # run: sudo apt-get install clang libcurl3 libcurl4-openssl-dev libpython2.7 libpython2.7-dev
+        # libicu-dev libstdc++6
       #   uses: wei/curl@master
       #   with:
       #     args: https://swift.org/builds/swift-5.1-release/ubuntu1604/swift-5.1-RELEASE/swift-5.1-RELEASE-ubuntu16.04.tar.gz 
       #   run: tar xzf swift-5.1-RELEASE-ubuntu16.04.tar.gz
       #   run: export PATH="$(pwd)/swift-5.1-RELEASE-ubuntu16.04/usr/bin:$PATH"
-      # - name: Testing
-      #   run: swift package update
-      #   run: swift test
+      - name: Update Package
+        run: swift package update
+      - name: Testing
+        run: swift test
   macos_test:
     name: MacOS Test
     runs-on: macos-latest
