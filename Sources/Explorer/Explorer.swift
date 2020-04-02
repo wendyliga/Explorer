@@ -292,7 +292,8 @@ extension Explorer {
             return .failure(ExplorerError.fileNotValid(file: operation.file.name))
         }
         
-        let target = self.target(path: operation.path, suffix: operation.file.name)
+        let `extension` = operation.file.extension == nil ? "" : "." + operation.file.extension!
+        let target = self.target(path: operation.path, suffix: operation.file.name + `extension`)
         
         if writingStrategy == .safe && fileManager.fileExists(atPath: target) == true {
             return .failure(ExplorerError.fileExist(file: target))
