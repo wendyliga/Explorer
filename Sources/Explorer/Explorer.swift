@@ -227,6 +227,10 @@ extension Explorer {
             .withoutSuffix("/") + "/" + suffix.withoutPrefix("/")
             .withoutSuffix("/")
     }
+    
+    public var currentDirectoryPath: String {
+        fileManager.currentDirectoryPath
+    }
 }
 
 extension Explorer {
