@@ -121,7 +121,7 @@ public struct BatchFolderOperation {
     }
 }
 
-public enum ExplorerError: Error, LocalizedError {
+public enum ExplorerError: Error, LocalizedError, Equatable {
     case pathDidNotExist(path: String)
     case fileExist(file: String)
     case fileNotValid(file: String)
