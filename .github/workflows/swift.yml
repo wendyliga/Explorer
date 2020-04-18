@@ -22,7 +22,6 @@ jobs:
       run: make test
     - name: Uploading Code Coverage
       run: llvm-cov export -format="lcov" .build/debug/ExplorerPackageTests.xctest -instr-profile .build/debug/codecov/default.profdata > info.lcov; bash <(curl https://codecov.io/bash)
-
   ubuntu_bionic_test:
     name: Ubuntu-18.04 Unit Test
     container: 
@@ -44,3 +43,6 @@ jobs:
       uses: actions/checkout@v2
     - name: Testing
       run: make test
+    - name: Uploading Code Coverage
+      run: xcrun llvm-cov export -format="lcov" .build/debug/ExplorerPackageTests.xctest -instr-profile .build/debug/codecov/default.profdata > info.lcov; bash <(curl https://codecov.io/bash)
+
