@@ -18,7 +18,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Testing
-      run: make test
+      run: swift test
   
   ubuntu_bionic_test:
     name: Ubuntu-18.04 Unit Test
@@ -29,7 +29,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Testing
-      run: make test
+      run: swift test
 
   xcodebuild_test:
     name: Xcodebuild Unit Test
@@ -37,9 +37,7 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Setup Environment
-      run: gem install xcpretty
     - name: Testing
-      run: make test_xcodebuild
+      run: swift package generate-xcodeproj; xcodebuild test -enableCodeCoverage YES -scheme Explorer-Package
     - name: Code Coverage
       run: bash <(curl -s https://codecov.io/bash)
