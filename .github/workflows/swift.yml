@@ -37,8 +37,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Generate Xcodeproj
-      run: swift package generate-xcodeproj
     - name: Testing
       run: xcodebuild test -enableCodeCoverage YES -scheme Explorer-Package -destination platform="macOS" -derivedDataPath .build/derivedData
     - name: Code Coverage
