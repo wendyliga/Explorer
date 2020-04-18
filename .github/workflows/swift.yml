@@ -40,5 +40,5 @@ jobs:
     - name: Testing
       run: xcodebuild test -enableCodeCoverage YES -scheme Explorer -destination platform="macOS" -derivedDataPath .build/derivedData
     - name: Code Coverage
-      # run: bash <(curl -s https://codecov.io/bash) -J '^Explorer$' -D .build/derivedData
-      run: bash <(curl -s https://codecov.io/bash) -D .build/derivedData
+      run: bash <(curl -s https://codecov.io/bash) -J '^Explorer$' -D .build/derivedData
+      # run: bash <(curl -s https://codecov.io/bash) -D .build/derivedData
