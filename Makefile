@@ -3,7 +3,7 @@ test:
 
 test_xcodebuild:
 	swift package generate-xcodeproj
-	xcodebuild test -scheme Explorer-Package | xcpretty
+	xcodebuild test -enableCodeCoverage YES -scheme Explorer-Package | xcpretty
 
 make_linux_test:
 	swift test --generate-linuxmain
