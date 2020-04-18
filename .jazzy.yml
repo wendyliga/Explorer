@@ -13,8 +13,8 @@ module: Explorer
 
 xcodebuild_arguments:  
   - -project
-  - SwiftKit.xcodeproj
+  - Explorer.xcodeproj
   - -target
-  - SwiftKit
+  - Explorer
 
 skip_undocumented: false
