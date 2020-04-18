@@ -9,27 +9,27 @@ on:
       - '*'
       
 jobs:
-  # ubuntu_xenial_test:
-  #   name: Ubuntu-16.04 Unit Test
-  #   runs-on: ubuntu-16.04
-  #   container: 
-  #     image: vapor/swift:5.2-xenial
-  #   steps:
-  #   - name: Checkout
-  #     uses: actions/checkout@v2
-  #   - name: Testing
-  #     run: swift test
+  ubuntu_xenial_test:
+    name: Ubuntu-16.04 Unit Test
+    runs-on: ubuntu-16.04
+    container: 
+      image: vapor/swift:5.2-xenial
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Testing
+      run: swift test
   
-  # ubuntu_bionic_test:
-  #   name: Ubuntu-18.04 Unit Test
-  #   container: 
-  #     image: vapor/swift:5.2-bionic
-  #   runs-on: ubuntu-18.04
-  #   steps:
-  #   - name: Checkout
-  #     uses: actions/checkout@v2
-  #   - name: Testing
-  #     run: swift test
+  ubuntu_bionic_test:
+    name: Ubuntu-18.04 Unit Test
+    container: 
+      image: vapor/swift:5.2-bionic
+    runs-on: ubuntu-18.04
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Testing
+      run: swift test
 
   xcodebuild_test:
     name: Xcodebuild Unit Test
@@ -41,4 +41,3 @@ jobs:
       run: xcodebuild test -enableCodeCoverage YES -scheme Explorer -destination platform="macOS" -derivedDataPath .build/derivedData
     - name: Code Coverage
       run: bash <(curl -s https://codecov.io/bash) -J '^Explorer$' -D .build/derivedData
-      # run: bash <(curl -s https://codecov.io/bash) -D .build/derivedData
