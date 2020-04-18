@@ -19,7 +19,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Testing
-      run: make test_linux
+      run: make test
+    - name: Uploading Code Coverage
+      run: llvm-cov export -format="lcov" .build/debug/ExplorerPackageTests.xctest -instr-profile .build/debug/codecov/default.profdata > info.lcov; bash <(curl https://codecov.io/bash)
 
   ubuntu_bionic_test:
     name: Ubuntu-18.04 Unit Test
@@ -30,7 +32,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Testing
-      run: make test_linux
+      run: make test
+    - name: Uploading Code Coverage
+      run: llvm-cov export -format="lcov" .build/debug/ExplorerPackageTests.xctest -instr-profile .build/debug/codecov/default.profdata > info.lcov; bash <(curl https://codecov.io/bash)
 
   macos_test:
     name: MacOS Unit Test
