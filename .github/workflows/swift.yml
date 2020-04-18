@@ -4,7 +4,6 @@ on:
   push:
     branches: 
       - master
-      - hotfix
   pull_request:
     branches: 
       - '*'
@@ -32,11 +31,13 @@ jobs:
     - name: Testing
       run: make test
 
-  macos_test:
-    name: MacOS Unit Test
+  xcodebuild_test:
+    name: Xcodebuild Unit Test
     runs-on: macos-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+    - name: Setup Environment
+      uses: gem install xcpretty
     - name: Testing
-      run: make test
+      run: make test_xcodebuild
