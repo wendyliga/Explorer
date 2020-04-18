@@ -1,4 +1,4 @@
-name: Swift
+name: Explorer CI
 
 on:
   push:
@@ -19,7 +19,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Testing
-      run: swift test
+      run: make test_linux
 
   ubuntu_bionic_test:
     name: Ubuntu-18.04 Unit Test
@@ -30,7 +30,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Testing
-      run: swift test
+      run: make test_linux
 
   macos_test:
     name: MacOS Unit Test
@@ -39,4 +39,4 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Testing
-      run: swift test
+      run: make test
