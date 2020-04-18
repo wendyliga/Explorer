@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Explorer Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/Explorer" class="dashAnchor"></a>
+    <a title="Explorer Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a> (23% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        Explorer Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/DefaultFileProvider.html">DefaultFileProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Explorer.html">Explorer</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/ExplorerError.html">ExplorerError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/WriteStrategy.html">WriteStrategy</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/Explorable.html">Explorable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/FileProvider.html">FileProvider</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/BatchFileOperation.html">BatchFileOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/BatchFolderOperation.html">BatchFolderOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/File.html">File</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Folder.html">Folder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SingleFileOperation.html">SingleFileOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SingleFolderOperation.html">SingleFolderOperation</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Explorer</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Explorer</span></code></pre>
+
+                </div>
+              </div>
+            <p>Undocumented</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ExplorerAAC7defaultABvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/default" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ExplorerAAC7defaultABvpZ">default</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Singleton of <code>Explorer</code> Class</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">let</span> <span class="err">`</span><span class="k">default</span><span class="err">`</span><span class="p">:</span> <span class="kt">Explorer</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ExplorerAAC4withAbA12FileProvider_p_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ExplorerAAC4withAbA12FileProvider_p_tcfc">init(with:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">with</span> <span class="nv">fileManager</span><span class="p">:</span> <span class="kt"><a href="../Protocols/FileProvider.html">FileProvider</a></span> <span class="o">=</span> <span class="kt"><a href="../Classes/DefaultFileProvider.html">DefaultFileProvider</a></span><span class="p">())</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ExplorerAAC20currentDirectoryPathSSvp"></a>
+                    <a name="//apple_ref/swift/Property/currentDirectoryPath" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ExplorerAAC20currentDirectoryPathSSvp">currentDirectoryPath</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">currentDirectoryPath</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ExplorerAAC6delete9operations6ResultOyAA19SingleFileOperationVs5Error_pGAH_tF"></a>
+                    <a name="//apple_ref/swift/Method/delete(operation:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ExplorerAAC6delete9operations6ResultOyAA19SingleFileOperationVs5Error_pGAH_tF">delete(operation:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete File</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">delete</span><span class="p">(</span><span class="nv">operation</span><span class="p">:</span> <span class="kt"><a href="../Structs/SingleFileOperation.html">SingleFileOperation</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SingleFileOperation.html">SingleFileOperation</a></span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>operation</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Delete operation, will delete spesific file at spesific path with <code><a href="../Structs/SingleFileOperation.html">SingleFileOperation</a></code></p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Result <code>Result&lt;SingleFileOperation, Error&gt;</code> of the operation.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ExplorerAAC6delete9operations6ResultOyAA21SingleFolderOperationVs5Error_pGAH_tF"></a>
+                    <a name="//apple_ref/swift/Method/delete(operation:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ExplorerAAC6delete9operations6ResultOyAA21SingleFolderOperationVs5Error_pGAH_tF">delete(operation:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete Folder</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">delete</span><span class="p">(</span><span class="nv">operation</span><span class="p">:</span> <span class="kt"><a href="../Structs/SingleFolderOperation.html">SingleFolderOperation</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SingleFolderOperation.html">SingleFolderOperation</a></span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>operation</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Delete operation, will delete spesific folder at spesific path.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Result <code>Result&lt;SingleFileOperation, Error&gt;</code> of the operation.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ExplorerAAC5write9operation15writingStrategys6ResultOyAA19SingleFileOperationVs5Error_pGAI_AA05WriteE0OtF"></a>
+                    <a name="//apple_ref/swift/Method/write(operation:writingStrategy:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ExplorerAAC5write9operation15writingStrategys6ResultOyAA19SingleFileOperationVs5Error_pGAI_AA05WriteE0OtF">write(operation:<wbr>writingStrategy:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Write file</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">write</span><span class="p">(</span><span class="nv">operation</span><span class="p">:</span> <span class="kt"><a href="../Structs/SingleFileOperation.html">SingleFileOperation</a></span><span class="p">,</span> <span class="nv">writingStrategy</span><span class="p">:</span> <span class="kt"><a href="../Enums/WriteStrategy.html">WriteStrategy</a></span> <span class="o">=</span> <span class="o">.</span><span class="n">safe</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SingleFileOperation.html">SingleFileOperation</a></span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>operation</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Write Operation, will write spesific to the operation</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>writingStrategy</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>how you want the operation to write based on spesific strategy</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>currentProgressCallback</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>add your custom action in the middle of the operation (for example, you want to print the current progress operation)</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Result of the operation.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ExplorerAAC5write9operation15writingStrategys6ResultOyAA18BatchFileOperationVs5Error_pGAI_AA05WriteE0OtF"></a>
+                    <a name="//apple_ref/swift/Method/write(operation:writingStrategy:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ExplorerAAC5write9operation15writingStrategys6ResultOyAA18BatchFileOperationVs5Error_pGAI_AA05WriteE0OtF">write(operation:<wbr>writingStrategy:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Write files</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">write</span><span class="p">(</span><span class="nv">operation</span><span class="p">:</span> <span class="kt"><a href="../Structs/BatchFileOperation.html">BatchFileOperation</a></span><span class="p">,</span> <span class="nv">writingStrategy</span><span class="p">:</span> <span class="kt"><a href="../Enums/WriteStrategy.html">WriteStrategy</a></span> <span class="o">=</span> <span class="o">.</span><span class="n">safe</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/BatchFileOperation.html">BatchFileOperation</a></span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>operation</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Write Operation, will write spesific to the operation</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>writingStrategy</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>how you want the operation to write based on spesific strategy</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>currentProgressCallback</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>add your custom action in the middle of the operation (for example, you want to print the current progress operation)</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Result of the operation.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ExplorerAAC5write9operation15writingStrategys6ResultOyAA21SingleFolderOperationVs5Error_pGAI_AA05WriteE0OtF"></a>
+                    <a name="//apple_ref/swift/Method/write(operation:writingStrategy:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ExplorerAAC5write9operation15writingStrategys6ResultOyAA21SingleFolderOperationVs5Error_pGAI_AA05WriteE0OtF">write(operation:<wbr>writingStrategy:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Write Folder, define your folder and files, and <code>Explorer</code> will create for you.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">write</span><span class="p">(</span><span class="nv">operation</span><span class="p">:</span> <span class="kt"><a href="../Structs/SingleFolderOperation.html">SingleFolderOperation</a></span><span class="p">,</span> <span class="nv">writingStrategy</span><span class="p">:</span> <span class="kt"><a href="../Enums/WriteStrategy.html">WriteStrategy</a></span> <span class="o">=</span> <span class="o">.</span><span class="n">safe</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SingleFolderOperation.html">SingleFolderOperation</a></span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>operation</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Write Operation, will write spesific to the operation</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>writingStrategy</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>how you want the operation to write based on spesific strategy</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>currentProgressCallback</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>add your custom action in the middle of the operation (for example, you want to print the current progress operation)</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Result of the operation.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ExplorerAAC5write9operation15writingStrategys6ResultOyAA20BatchFolderOperationVs5Error_pGAI_AA05WriteE0OtF"></a>
+                    <a name="//apple_ref/swift/Method/write(operation:writingStrategy:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ExplorerAAC5write9operation15writingStrategys6ResultOyAA20BatchFolderOperationVs5Error_pGAI_AA05WriteE0OtF">write(operation:<wbr>writingStrategy:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Write Folder, define your folder and files, and <code>Explorer</code> will create for you.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">write</span><span class="p">(</span><span class="nv">operation</span><span class="p">:</span> <span class="kt"><a href="../Structs/BatchFolderOperation.html">BatchFolderOperation</a></span><span class="p">,</span> <span class="nv">writingStrategy</span><span class="p">:</span> <span class="kt"><a href="../Enums/WriteStrategy.html">WriteStrategy</a></span> <span class="o">=</span> <span class="o">.</span><span class="n">safe</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/BatchFolderOperation.html">BatchFolderOperation</a></span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>operation</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Write Operation, will write spesific to the operation</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>writingStrategy</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>how you want the operation to write based on spesific strategy</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>currentProgressCallback</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>add your custom action in the middle of the operation (for example, you want to print the current progress operation)</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Result of the operation.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ExplorerAAC11isFileExist4pathSbSS_tF"></a>
+                    <a name="//apple_ref/swift/Method/isFileExist(path:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ExplorerAAC11isFileExist4pathSbSS_tF">isFileExist(path:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Check if current path is exist or not</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">isFileExist</span><span class="p">(</span><span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ExplorerAAC6isFile4paths6ResultOySbs5Error_pGSS_tF"></a>
+                    <a name="//apple_ref/swift/Method/isFile(path:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ExplorerAAC6isFile4paths6ResultOySbs5Error_pGSS_tF">isFile(path:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Check if current path is file or directory</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">isFile</span><span class="p">(</span><span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Bool</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ExplorerAAC4list2at10withFolder11isRecursives6ResultOySayAA10Explorable_pGs5Error_pGSS_S2btF"></a>
+                    <a name="//apple_ref/swift/Method/list(at:withFolder:isRecursive:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ExplorerAAC4list2at10withFolder11isRecursives6ResultOySayAA10Explorable_pGs5Error_pGSS_S2btF">list(at:<wbr>withFolder:<wbr>isRecursive:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Scan directory at path, will return the content inside it</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">list</span><span class="p">(</span><span class="n">at</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">withFolder</span> <span class="nv">isFolderIncluded</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="nv">isRecursive</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="p">[</span><span class="kt"><a href="../Protocols/Explorable.html">Explorable</a></span><span class="p">],</span> <span class="kt">Error</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>path</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Path to scan</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>withFolder</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Also Scan folder or not</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>isRecursive</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>will include content inside folder</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Result of Explorables</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2020-04-18)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

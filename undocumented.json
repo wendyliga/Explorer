@@ -1,0 +1,418 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 4,
+      "symbol": "Explorer",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 15,
+      "symbol": "Explorer.init(with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 47,
+      "symbol": "Explorable.attributes",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 50,
+      "symbol": "Folder",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 51,
+      "symbol": "Folder.name",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 52,
+      "symbol": "Folder.contents",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 53,
+      "symbol": "Folder.attributes",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 55,
+      "symbol": "Folder.init(name:contents:attributes:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 62,
+      "symbol": "File",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 63,
+      "symbol": "File.name",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 74,
+      "symbol": "File.attributes",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 76,
+      "symbol": "File.init(name:content:extension:attributes:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 84,
+      "symbol": "SingleFileOperation",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 85,
+      "symbol": "SingleFileOperation.file",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 86,
+      "symbol": "SingleFileOperation.path",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 88,
+      "symbol": "SingleFileOperation.init(file:path:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 94,
+      "symbol": "BatchFileOperation",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 95,
+      "symbol": "BatchFileOperation.files",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 96,
+      "symbol": "BatchFileOperation.path",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 98,
+      "symbol": "BatchFileOperation.init(files:path:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 104,
+      "symbol": "SingleFolderOperation",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 105,
+      "symbol": "SingleFolderOperation.folder",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 106,
+      "symbol": "SingleFolderOperation.path",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 108,
+      "symbol": "SingleFolderOperation.init(folder:path:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 114,
+      "symbol": "BatchFolderOperation",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 115,
+      "symbol": "BatchFolderOperation.folders",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 116,
+      "symbol": "BatchFolderOperation.path",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 118,
+      "symbol": "BatchFolderOperation.init(folders:path:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 124,
+      "symbol": "ExplorerError",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 125,
+      "symbol": "ExplorerError.pathDidNotExist(path:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 126,
+      "symbol": "ExplorerError.fileExist(file:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 127,
+      "symbol": "ExplorerError.fileNotValid(file:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 128,
+      "symbol": "ExplorerError.directoryNotValid(directory:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 129,
+      "symbol": "ExplorerError.writeError(file:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 147,
+      "symbol": "FileProvider",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 148,
+      "symbol": "FileProvider.fileExists(atPath:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 149,
+      "symbol": "FileProvider.fileExists(atPath:isDirectory:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 150,
+      "symbol": "FileProvider.removeItem(atPath:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 151,
+      "symbol": "FileProvider.createFile(atPath:contents:attributes:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 152,
+      "symbol": "FileProvider.createDirectory(atPath:withIntermediateDirectories:attributes:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 153,
+      "symbol": "FileProvider.contentsOfDirectory(atPath:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 154,
+      "symbol": "FileProvider.attributesOfItem(atPath:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 156,
+      "symbol": "FileProvider.currentDirectoryPath",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 159,
+      "symbol": "DefaultFileProvider",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 162,
+      "symbol": "DefaultFileProvider.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 164,
+      "symbol": "DefaultFileProvider.currentDirectoryPath",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 168,
+      "symbol": "DefaultFileProvider.fileExists(atPath:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 172,
+      "symbol": "DefaultFileProvider.fileExists(atPath:isDirectory:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 176,
+      "symbol": "DefaultFileProvider.removeItem(atPath:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 180,
+      "symbol": "DefaultFileProvider.createFile(atPath:contents:attributes:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 184,
+      "symbol": "DefaultFileProvider.createDirectory(atPath:withIntermediateDirectories:attributes:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 188,
+      "symbol": "DefaultFileProvider.contentsOfDirectory(atPath:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 192,
+      "symbol": "DefaultFileProvider.attributesOfItem(atPath:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 223,
+      "symbol": "Explorer",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 231,
+      "symbol": "Explorer.currentDirectoryPath",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 236,
+      "symbol": "Explorer",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 278,
+      "symbol": "Explorer",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 437,
+      "symbol": "Explorer",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.0/work/Explorer/Explorer/Sources/Explorer/Explorer.swift",
+      "line": 459,
+      "symbol": "Explorer",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/runner/runners/2.169.0/work/Explorer/Explorer"
+}
