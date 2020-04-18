@@ -40,6 +40,6 @@ jobs:
     - name: Generate Xcodeproj
       run: swift package generate-xcodeproj
     - name: Testing
-      run: xcodebuild test -enableCodeCoverage YES -scheme Explorer-Package -derivedDataPath .build/derivedData
+      run: xcodebuild test -enableCodeCoverage YES -scheme Explorer-Package -destination platform="macOS" -derivedDataPath .build/derivedData
     - name: Code Coverage
       run: bash <(curl -s https://codecov.io/bash) -J '^Explorer$' -D .build/derivedData
