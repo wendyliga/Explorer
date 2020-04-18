@@ -1,8 +1,7 @@
 test:
 	swift test --enable-code-coverage
 
-test_linux:
+make_linux_test:
 	swift test --generate-linuxmain
-	swift test --enable-code-coverage
 
-.PHONY: test test_linux
+.PHONY: test make_linux_test

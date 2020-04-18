@@ -19,7 +19,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Testing
-      run: make test_linux
+      run: make test
 
   ubuntu_bionic_test:
     name: Ubuntu-18.04 Unit Test
@@ -30,7 +30,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Testing
-      run: make test_linux
+      run: make test
 
   macos_test:
     name: MacOS Unit Test
