@@ -1,0 +1,20 @@
+clean: true
+objc: false
+
+author: Wendy Liga
+author_url: https://github.com/wendyliga
+github_url: https://github.com/wendyliga/Explorer
+github_file_prefix: https://github.com/wendyliga/Explorer/tree/master
+copyright: '© 2020 [Wendy Liga](https://github.com/wendyliga) under [open source license](https://github.com/wendyliga/Explorer/blob/master/LICENSE).'
+
+theme: apple
+
+module: Explorer
+
+xcodebuild_arguments:  
+  - -project
+  - Explorer.xcodeproj
+  - -target
+  - Explorer
+
+skip_undocumented: false
