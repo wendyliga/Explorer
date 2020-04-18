@@ -12,15 +12,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      # - name: Setup Environment
-      #   run: gem install jazzy
-      # - name: Setup Project
-      #   run: swift package generate-xcodeproj
-      # - name: Generate Documentation
-      #   run: jazzy .
-      # - name: Deploy 
-      #   uses: JamesIves/github-pages-deploy-action@releases/v3
-      #   with:
-      #     ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-      #     BRANCH: gh-pages # The branch the action should deploy to.
-      #     FOLDER: docs # The folder the action should deploy.
+      - name: Setup Environment
+        run: gem install jazzy
+      - name: Setup Project
+        run: swift package generate-xcodeproj
+      - name: Generate Documentation
+        run: jazzy .
+      - name: Deploy 
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: docs # The folder the action should deploy.
