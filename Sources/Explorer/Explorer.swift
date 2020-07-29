@@ -40,8 +40,6 @@ public enum WriteStrategy {
 
 /**
  An abstraction for any path related value used on Explorer
- 
- For now used to abstract `Folder` and `File`
  */
 public protocol Explorable {
     var attributes: [FileAttributeKey : Any]? { get }
@@ -65,6 +63,7 @@ public struct File: Explorable {
     /**
      File content in String, for now, only support file that're not need any spesial encoding, so for example , png file will have empty content.
      */
+    // TODO: support custom `Data`
     public let content: String?
     
     /**
@@ -81,52 +80,29 @@ public struct File: Explorable {
     }
 }
 
-public struct SingleFileOperation {
-    public let file: File
-    public let path: String
-    
-    public init(file: File, path: String) {
-        self.file = file
-        self.path = path
+public struct WriteResult {
+    public enum Result {
+        case success
+        case failure(WriteError)
     }
+    
+    public let explorable: Explorable
+    public let result: Result
 }
 
-public struct BatchFileOperation {
-    public let files: [File]
-    public let path: String
-    
-    public init(files: [File], path: String) {
-        self.files = files
-        self.path = path
-    }
-}
-
-public struct SingleFolderOperation {
-    public let folder: Folder
-    public let path: String
-    
-    public init(folder: Folder, path: String) {
-        self.folder = folder
-        self.path = path
-    }
-}
-
-public struct BatchFolderOperation {
-    public let folders: [Folder]
-    public let path: String
-    
-    public init(folders: [Folder], path: String) {
-        self.folders = folders
-        self.path = path
-    }
+public enum WriteError {
+    case unidentifiedError
+    case fileExist
+    case fileNotValid
+    case createFolder(Error)
 }
 
 public enum ExplorerError: Error, LocalizedError, Equatable {
     case pathDidNotExist(path: String)
-    case fileExist(file: String)
-    case fileNotValid(file: String)
-    case directoryNotValid(directory: String)
-    case writeError(file: String)
+    case fileExist(File)
+    case fileNotValid(File)
+    case directoryNotValid(Folder)
+    case writeError(File)
     
     public var errorDescription: String? {
         switch self {
@@ -276,161 +252,103 @@ extension Explorer {
 }
     
 extension Explorer {
-    /**
-     Write file
-     
-     - Parameters:
-        - operation: Write Operation, will write spesific to the operation
-        - writingStrategy: how you want the operation to write based on spesific strategy
-        - currentProgressCallback: add your custom action in the middle of the operation (for example, you want to print the current progress operation)
-     
-     - Returns: Result of the operation.
-     */
-    @discardableResult
-    public func write(operation: SingleFileOperation, writingStrategy: WriteStrategy = .safe) -> Result<SingleFileOperation, Error> {
-        guard operation.path.isNotEmpty else {
-            return .failure(ExplorerError.pathDidNotExist(path: operation.path))
-        }
-        
-        guard operation.file.name.isNotEmpty else {
-            return .failure(ExplorerError.fileNotValid(file: operation.file.name))
-        }
-        
-        let `extension` = operation.file.extension == nil ? "" : "." + operation.file.extension!
-        let target = self.target(path: operation.path, suffix: operation.file.name + `extension`)
-        
-        if writingStrategy == .safe && fileManager.fileExists(atPath: target) == true {
-            return .failure(ExplorerError.fileExist(file: target))
-        }
-        
-        if writingStrategy == .skippable && fileManager.fileExists(atPath: target) == true {
-            return .success(operation)
-        }
-        
-        // default create file will overwrite the target
-        guard fileManager.createFile(atPath: target, contents: operation.file.content?.data(using: .utf8), attributes: operation.file.attributes) else {
-            return .failure(ExplorerError.writeError(file: target))
-        }
-        
-        return .success(operation)
-    }
     
-    /**
-    Write files
-    
-    - Parameters:
-       - operation: Write Operation, will write spesific to the operation
-       - writingStrategy: how you want the operation to write based on spesific strategy
-       - currentProgressCallback: add your custom action in the middle of the operation (for example, you want to print the current progress operation)
-    
-    - Returns: Result of the operation.
-    */
-    @discardableResult
-    public func write(operation: BatchFileOperation, writingStrategy: WriteStrategy = .safe) -> Result<BatchFileOperation, Error> {
-        guard operation.path.isNotEmpty else {
-            return .failure(ExplorerError.pathDidNotExist(path: operation.path))
+    public func write(
+        _ explorables: [Explorable],
+        at path: String,
+        writingStrategy: WriteStrategy = .safe
+    ) -> Result<[WriteResult], Error> {
+        guard path.isNotEmpty else {
+            return .failure(ExplorerError.pathDidNotExist(path: path))
         }
         
-        let results = operation.files.map {
-            write(operation: SingleFileOperation(file: $0, path: operation.path), writingStrategy: writingStrategy)
+        // final result
+        var results: [WriteResult] = []
+        
+        for explorable in explorables {
+            // handle file
+            if let file = explorable as? File {
+                guard file.name.isNotEmpty else {
+                    return .failure(ExplorerError.fileNotValid(file))
+                }
+                
+                let `extension` =  file.extension == nil ? "" : "." + file.extension!
+                let target = self.target(path: path, suffix: file.name + `extension`)
+                
+                if writingStrategy == .safe && fileManager.fileExists(atPath: target) == true {
+                    return .failure(ExplorerError.fileExist(file))
+                }
+                
+                if writingStrategy == .skippable && fileManager.fileExists(atPath: target) == true {
+                    let result = WriteResult(
+                        explorable: file,
+                        result: .failure(.fileExist)
+                    )
+                    results.append(result)
+                    continue
+                }
+                
+                // write file
+                guard fileManager.createFile(
+                    atPath: target,
+                    contents: file.content?.data(using: .utf8),
+                    attributes: file.attributes)
+                else {
+                    if writingStrategy == .skippable {
+                        results.append(.init(explorable: file, result: .failure(.unidentifiedError)))
+                        continue
+                    }
+                    
+                    return .failure(ExplorerError.writeError(file))
+                }
+                
+                results.append(.init(explorable: file, result: .success))
+                continue
+            }
+                
+            // handle folder
+            else if let folder = explorable as? Folder {
+                var folderResult: [WriteResult] = []
+                
+                guard folder.name.isNotEmpty else {
+                    return .failure(ExplorerError.directoryNotValid(folder))
+                }
+                
+                let target = self.target(path: path, suffix: folder.name)
+                
+                // create folder
+                do {
+                    try fileManager.createDirectory(
+                        atPath: target,
+                        withIntermediateDirectories: true,
+                        attributes: folder.attributes
+                    )
+                } catch let error {
+                    if writingStrategy == .skippable {
+                        results.append(.init(explorable: folder, result: .failure(.createFolder(error))))
+                        continue
+                    }
+                    
+                    return .failure(error)
+                }
+                
+                // write file inside folder
+                let file = folder.contents
+                .compactMap { $0 as? File }
+                
+                let writeFileResult = self.write(file, at: path, writingStrategy: writingStrategy)
+                
+                if let successResult = writeFileResult.successValue, writingStrategy == .skippable {
+                    
+                }
+                
+                let folders = folder.contents
+                    .compactMap { $0 as? Folder }
+                
+                let writeFolderResult = self.write(folders, at: path, writingStrategy: writingStrategy)
+                
+            }
         }
-        
-        let failureResults = results.compactMap { $0.failureValue }
-        
-        // revert if failed
-        guard failureResults.isEmpty else {
-            
-            // delete all success file
-            results.compactMap{ $0.successValue }
-                .forEach { delete(operation: $0) }
-            
-            return .failure(GeneralError.multipleError(failureResults))
-        }
-        
-        return .success(operation)
-    }
-    
-    /**
-     Write Folder, define your folder and files, and `Explorer` will create for you.
-     
-     - Parameters:
-        - operation: Write Operation, will write spesific to the operation
-        - writingStrategy: how you want the operation to write based on spesific strategy
-        - currentProgressCallback: add your custom action in the middle of the operation (for example, you want to print the current progress operation)
-     
-     - Returns: Result of the operation.
-     */
-    @discardableResult
-    public func write(operation: SingleFolderOperation, writingStrategy: WriteStrategy = .safe) -> Result<SingleFolderOperation, Error> {
-        guard operation.path.isNotEmpty else {
-            return .failure(ExplorerError.pathDidNotExist(path: operation.path))
-        }
-        
-        guard operation.folder.name.isNotEmpty else {
-            return .failure(ExplorerError.directoryNotValid(directory: operation.folder.name))
-        }
-        
-        let target = self.target(path: operation.path, suffix: operation.folder.name)
-        
-        do {
-            try fileManager.createDirectory(atPath: target, withIntermediateDirectories: true, attributes: operation.folder.attributes)
-        } catch let error {
-            return .failure(error)
-        }
-        
-        let folders = operation.folder.contents
-            .compactMap { $0 as? Folder }
-        
-        let file = operation.folder.contents
-            .compactMap { $0 as? File }
-        
-        let writeFolderOperation = BatchFolderOperation(folders: folders, path: target)
-        let writeFileOperation = BatchFileOperation(files: file, path: target)
-        
-        if case .failure(let error) = write(operation: writeFolderOperation, writingStrategy: writingStrategy) {
-             return .failure(error)
-        }
-        
-        if case .failure(let error) = write(operation: writeFileOperation, writingStrategy: writingStrategy) {
-             return .failure(error)
-        }
-        
-        return .success(operation)
-    }
-    
-    /**
-    Write Folder, define your folder and files, and `Explorer` will create for you.
-    
-    - Parameters:
-       - operation: Write Operation, will write spesific to the operation
-       - writingStrategy: how you want the operation to write based on spesific strategy
-        - currentProgressCallback: add your custom action in the middle of the operation (for example, you want to print the current progress operation)
-    
-    - Returns: Result of the operation.
-    */
-    @discardableResult
-    public func write(operation: BatchFolderOperation, writingStrategy: WriteStrategy = .safe) -> Result<BatchFolderOperation, Error> {
-        guard operation.path.isNotEmpty else {
-            return .failure(ExplorerError.pathDidNotExist(path: operation.path))
-        }
-        
-        let results = operation.folders.map {
-            write(operation: SingleFolderOperation(folder: $0, path: operation.path), writingStrategy: writingStrategy)
-        }
-        
-        let failureResults = results.compactMap { $0.failureValue }
-        
-        // revert if failed
-        guard failureResults.isEmpty else {
-            
-            // delete all success file
-            results.compactMap{ $0.successValue }
-                .forEach { delete(operation: $0) }
-            
-            return .failure(GeneralError.multipleError(failureResults))
-        }
-        
-        return .success(operation)
     }
 }
 
@@ -467,7 +385,8 @@ extension Explorer {
      
      - Returns: Result of Explorables
      */
-    public func list(at path: String, withFolder isFolderIncluded: Bool, isRecursive: Bool) -> Result<[Explorable], Error> {
+    
+    public func read(at path: String, withFolder isFolderIncluded: Bool, isRecursive: Bool) -> Result<[Explorable], Error> {
         let target = self.target(path: path, suffix: "")
         
         guard let findings = try? fileManager.contentsOfDirectory(atPath: target) else {
@@ -504,7 +423,7 @@ extension Explorer {
             }
             
             // recursivly scan throught folder, until no folder found
-            let recursiveScanFolder = self.list(at: filePath, withFolder: isFolderIncluded, isRecursive: isRecursive)
+            let recursiveScanFolder = self.read(at: filePath, withFolder: isFolderIncluded, isRecursive: isRecursive)
             
             guard let recursiveExplorables = recursiveScanFolder.successValue else {
                 return .failure(recursiveScanFolder.failureValue!)
