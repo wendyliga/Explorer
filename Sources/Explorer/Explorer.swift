@@ -296,7 +296,7 @@ extension Explorer {
             return .failure(ExplorerError.fileNotValid(file: operation.file.name))
         }
         
-        let `extension` = operation.file.extension == nil ? "" : "." + operation.file.extension!
+        let `extension` = operation.file.extension?.nonEmpty == nil ? "" : "." + operation.file.extension!
         let target = self.target(path: operation.path, suffix: operation.file.name + `extension`)
         
         if writingStrategy == .safe && fileManager.fileExists(atPath: target) == true {
@@ -484,10 +484,15 @@ extension Explorer {
             
             guard !isFile else {
                 let filenameWithoutExtension = filename.withoutExtension()
-                let fileExtension = filename.withoutPrefix(filenameWithoutExtension + ".")
+                let fileExtension = filename.split(separator: ".").last
                 let attributes = try? self.fileManager.attributesOfItem(atPath: filePath)
                 
-                let file = File(name: filenameWithoutExtension, content: try? String(contentsOfFile: filePath, encoding: .utf8), extension: fileExtension, attributes: attributes)
+                let file = File(
+                    name: filenameWithoutExtension,
+                    content: try? String(contentsOfFile: filePath, encoding: .utf8),
+                    extension: fileExtension == nil ? nil : String(fileExtension!),
+                    attributes: attributes
+                )
                 return .success([file])
             }
             
